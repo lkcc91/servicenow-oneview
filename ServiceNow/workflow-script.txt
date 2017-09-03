@@ -1,16 +1,17 @@
 (function executeRule(current, previous /*null when async*/) {
-	//gs.info("current object : " + current.name);
-	//gs.addInfoMessage("current object : " + current.name);
-	gs.info("check selected value RHEL : " + current.variables.OS_RHEL72);
-	gs.info("check selected value RHEL : " + current.variables.OS_RHEL73);
-	gs.info("check selected value ESX : " + current.variables.OS_ESX6);
+	//gs.info("current object : " + current);
+	//gs.addInfoMessage("current object : " + current);
+	//gs.info("check selected value RHEL : " + current.variables.OS_RHEL72);
+	gs.info("check selected value RHEL : " + current.variables.RHEL_73);
+        gs.addInfoMessage("check selected value RHEL : " + current.variables);
+	//gs.info("check selected value ESX : " + current.variables.OS_ESX6);
 	var os_name = '';
-	if (current.variables.OS_RHEL72) {
-		os_name = 'RHEL7.2';
-	} else if (current.variables.OS_RHEL73) {
-		os_name = 'RHEL7.3';
-	} else if (current.variables.OS_ESX6) {
-		os_name = 'ESX6';
+	if (current.variables.RHEL_72) {
+		os_name = 'RHEL_72';
+	} else if (current.variables.RHEL_73) {
+		os_name = 'RHEL_73';
+	} else if (current.variables.ESX_65) {
+		os_name = 'ESX_65';
 	}
 	var uuid = '';
 	var target = new GlideRecord('cmdb_ci_server');
@@ -25,8 +26,8 @@
 	
 	
 	gs.info( "Before calling login API");
-	var arrow_address = "15.218.153.166";
-	var midServer = 'linux-mid-server';
+	var arrow_address = "10.188.28.35";
+	var midServer = 'midserver-houston-vm';
 	
 	if (current == null)
 		return;
@@ -34,7 +35,7 @@
 	try {		 
 		
 		 //POST /v1/login-sessions to get the token
-		 var restMessage = new sn_ws.RESTMessageV2('x_tieoy_oneview_in.arrow login prakash', 'post');
+		 var restMessage = new sn_ws.RESTMessageV2('hpe_oneview_arrow_login', 'post');
 		 
 		 restMessage.setEndpoint("http://" + arrow_address +":3000/arrow/v1/login-sessions");
 		 restMessage.setMIDServer(midServer);
@@ -52,7 +53,7 @@
 			 
 		 if (httpStatus == 200) {
 			 //POST call /arrow/v1/provision-server to create a server profile
-			 var restMessage2 = new sn_ws.RESTMessageV2('x_tieoy_oneview_in.oneview server provision', 'post');
+			 var restMessage2 = new sn_ws.RESTMessageV2('hpe_oneview_server_provision', 'post');
 			 //set the request body
 			 //TODO: get these values from table instead of hard-coding
 			 //"36343537-3338-4E43-3735-313730434D37"
