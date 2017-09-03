@@ -1,7 +1,7 @@
 {
-"host":"16.114.216.60",
+"host":"10.10.10.10",
 "user":"Administrator",
-"passwd":"hpevse123",
+"passwd":"yourpassword",
 "action" :"start",
 "route":"scmb.alerts.#"
 }
