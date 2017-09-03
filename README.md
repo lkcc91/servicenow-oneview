@@ -1,26 +1,26 @@
 # HPE OneView to Service-Now Integration
 The code within this repository builds an integration between HPE OneView and an instance of Service NOW.
+
 The following use cases are supported by this integration.
 
-## Use case #1: Configuration management
+## Use case #1: Incident management
 
-- Auto-discover available servers with HPE OneView
+- Listen on alerts indentified by HPE OneView
+- Filter alerts based on SNMP and post only specific alerts as either incidents or events in ServiceNow 
+- Update existing incidents as ongoing activities change status
+- Close incident in ServiceNow to clear associated alerts in HPE OneView ( by directional integration )
+
+## Use case #2: Configuration management
+
 - Update Configuration Items (CI) in ServiceNow
 - Keep CI items in sync with periodic refresh using a scheduler of your choice
 
-## Use case #2: Incident management
-
-- Listen on alerts indentified by HPE OneView
-- Filter alerts based on SNMP and post only specific alerts as incidents in ServiceNow 
-- Update existing incidents as ongoing activities change status
-- Backsync - Close incident in ServiceNow to clear associated alerts in HPE OneView
-
 ## Use case #3: Service catalog offering
 
-- Design and present an HPE Synergy service in the service catalog
-- Provision a composable resource when requested from the service catalog. 
+- Design and present an HPE Synergy service offering in the service catalog
+- Provision bare metal server when requested from the service catalog. 
 
-## Pre-requisites
+## Pre-requisites ( Software dependancies to run this integration )
 
 - HPE OneView 3.0 or above ( tested on 3.0, it should work with 3.1 by passing correct X-API-Version )
 - Service NOW - Helsinki  or above version ( tested on Helsinki )
@@ -40,10 +40,21 @@ The following use cases are supported by this integration.
 4. If elasticsearch instance is running on localhost, no need to update the esPersistance.js else update the esPersistance.js for IP address/hostname of elasticsearch. 
 5. configure MID server with your servicenow instance and start the service
 5. Define outbound REST message APIs on servicenow instance to communicate with integration pack instance. Here are the high level steps:
- - login to your servicenow instance, then go to outbound REST message. 
- - Let us create 3 REST message APIs as shown in the below picture. 
- - ![Sample REST Message APIs](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_Messages%20_%20ServiceNow.png)
-6. configure business rules on the incidents. You can copy code from ServiceNow/incidents_business_rules.txt and edit IP address and MID server names. The rule will execute when user closes incident on server. This rule makes REST call to integration server and then active alert on oneview would get closed.
+    - login to your servicenow instance, then go to outbound REST message. 
+    - Let us create 3 REST message APIs as shown in the below picture. 
+    - ![Sample REST Message APIs](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_Messages%20_%20ServiceNow.png)
+        -POST <base url>:3000/arrow/v1/incident
+            sample playload and headers are in the below picture
+            ![Sample POST /arrow/v1/incident](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_POST_ALERT_%20ServiceNow.png)
+        -POST <base url>:3000/arrow/v1/login-sessions
+            sample playload and headers are in the below picture
+            ![Sample POST /arrow/v1/login-sessions](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_POST_LOGIN-SESSIONS_%20ServiceNow.png)
+        -POST <base url>:3000/arrow/v1/provision-server
+            sample playload and headers are in the below picture
+            ![Sample POST /arrow/v1/provision-server](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_POST_SERVER_PROVISION_%20ServiceNow.png)
+6. configure business rules on the incidents. You can copy business rule code from ServiceNow/incidents_business_rules.txt and edit IP address and MID server name. The rule will execute when user closes incident on server. This rule makes REST call to integration server and then active alert on oneview would get closed.
+7. create workflow design with custom run script. You can copy custom workflow runscript code from ServiceNow/workflow-script.txt and edit the IP address and MID server name. The sample workflow will get executed when requested service catalog item is approved. Here is sample workflow design.
+    ![Sample Workflow Design](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/Workflow_Design_ServiceNow.png)
 7. Edit servicenow-oneview/arguments.json with your servicenow instance credentials
 
 ## How to run the application  
@@ -58,3 +69,6 @@ The following use cases are supported by this integration.
 3. If you close an incident in servicenow, the alert will be cleared on oneview
 4. Review arrow.log and OVSB.log for additional troubleshooting ( if you run into any issues )
 
+## Assumptions
+1. Initial HPE servers records should be created in the ServiceNow CMDB
+2. Service catalog request offering should be created for running use case # 2
