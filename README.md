@@ -42,7 +42,7 @@ The following use cases are supported by this integration.
 5. Define outbound REST message APIs on servicenow instance to communicate with integration pack instance. Here are the high level steps:
  - login to your servicenow instance, then go to outbound REST message. 
  - Let us create 3 REST message APIs as shown in the below picture. 
- - ![Alt txt](https://github.com/HewlettPackard/servicenow-oneview/tree/master/images/REST_Messages_ServiceNow.png)
+ - ![Sample REST Message APIs](https://github.com/HewlettPackard/servicenow-oneview/blob/master/images/REST_Messages%20_%20ServiceNow.png)
 6. configure business rules on the incidents. You can copy code from ServiceNow/incidents_business_rules.txt and edit IP address and MID server names. The rule will execute when user closes incident on server. This rule makes REST call to integration server and then active alert on oneview would get closed.
 7. Edit servicenow-oneview/arguments.json with your servicenow instance credentials
 
