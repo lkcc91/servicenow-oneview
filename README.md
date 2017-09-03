@@ -64,11 +64,20 @@ The following use cases are supported by this integration.
    >python3 ovincidents.py -i <path to arguments.json>
 
 ## How to test and troubleshoot
-1. Simulate or generate "active" alert on oneview
-2. You should see an new incidents on servicenow ( if incident already exists, it updated with new alert. One incident per server hardware )
-3. If you close an incident in servicenow, the alert will be cleared on oneview
-4. Review arrow.log and OVSB.log for additional troubleshooting ( if you run into any issues )
-
+### Use Case #1
+    1. Simulate or generate "active" alert on oneview
+    2. You should see an new incidents on servicenow ( if incident already exists, it updated with new alert. One incident per server hardware )
+    3. If you close an incident in servicenow, the alert will be cleared on oneview
+    4. Review arrow.log and OVSB.log for additional troubleshooting ( if you run into any issues )
+### Use Case #3
+    1. Request service catalog if you have design service catalog request
+    2. Approve the request
+    3. You should bare metal server getting provisioned in OneView
+### Use Case #2
+    1. Run scripts/synchw.py through Run deck or manually
+    2. After running the above scripts, records in CMDB should be updated.
 ## Assumptions
 1. Initial HPE servers records should be created in the ServiceNow CMDB
 2. Service catalog request offering should be created for running use case # 2
+3. Optionally configure the run deck to run the sync script automatically
+4. Image Streamer feature is used for OS provisioning
