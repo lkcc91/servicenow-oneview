@@ -1,19 +1,19 @@
 {
 	"oneview": {
 		"host": "10.188.28.50",
-		"user": "v028usradmin",
-		"passwd": "HP!nvent",
+		"user": "administrator",
+		"passwd": "yourpassword",
 		"action": "start",
 		"route": "scmb.alerts.#"
 	},
 	"servicenow": {
-		"instance": "dev17378",
+		"instance": "devxxxxx",
 		"username": "admin",
-		"password": "admin",
+		"password": "admin123",
 		"assignmentgroup": ""
 	},
 	"arrow": {
 		"username": "admin",
-		"password": "admin"
+		"password": "admin123"
 	}
 }
