@@ -1,0 +1,13 @@
+{
+	"refresh_interval": "720m", 
+	"log": {
+	    "src": null,
+	    "level": "info",
+	    "period": "1d",
+	    "totalFiles": 90,
+	    "rotateExisting": true,
+	    "threshold": "20m",
+	    "totalSize": "1g",
+	    "gzip": true
+  	}
+}

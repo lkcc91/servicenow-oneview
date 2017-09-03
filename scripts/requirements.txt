@@ -1,0 +1,4 @@
+future >= 0.15.2
+# Elasticsearch 2.x
+elasticsearch>=2.0.0,<3.0.0
+

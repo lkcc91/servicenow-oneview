@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src='frontend.js'></script>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #ffffff;
+                border-color: #ddd;
+                background-image: url(images/oneview_logo.PNG);
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat; height:20%">
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="host">Host:</label>
+                        <input type="text" class="form-control" id="oneViewHost">
+                    </div>
+                    <div class="form-group">
+                        <label for="user">User:</label>
+                        <input type="text" class="form-control" id="oneViewUser">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd">Password:</label>
+                        <input type="password" class="form-control" id="oneViewPasswd">
+                    </div>
+                    <div class="form-group">
+                        <label for="action">Action:</label>
+                        <input type="text" class="form-control" id="oneViewAction">
+                    </div>
+                    <div class="form-group">
+                        <label for="route">Route:</label>
+                        <input type="text" class="form-control" id="oneViewRoute">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #ffffff;
+                border-color: #ddd;
+                background-image: url(images/Servicenow-Inc-logo.gif);
+                background-position: center;
+                background-size: 80%;
+                background-repeat: no-repeat; height:20%">
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="instance">Instance:</label>
+                        <input type="text" class="form-control" id="serviceNowInstance">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="serviceNowUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="serviceNowPassword">
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color: #ffffff;
+                border-color: #ddd;
+                background-image: url(images/arrow-31.png);
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat; height:20%">
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="arrowUsername">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="arrowPassword">
+                    </div>
+					<div class="form-group">                                             
+						<label class="btn btn-default btn-file">
+							Trap List <input type="file" hidden>
+						</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-md-4">
+         </div>
+
+
+
+
+         <div class="col-md-4">
+             <button type="button" id="saveButton" class="btn btn-success pull-right btn-group-justified btn-sm">Save</button>
+         </div>
+		 <div class="col-md-4">
+             <button type="button" id="StartButton" class="btn btn-success pull-right btn-group-justified btn-md">Start</button>
+         </div>
+
+
+
+
+         <div class="col-md-4">
+         </div>
+    </div>
+</body>
+
+</html>

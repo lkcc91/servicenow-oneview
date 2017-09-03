@@ -1,0 +1,77 @@
+(function executeRule(current, previous /*null when async*/) {
+	//gs.info("current object : " + current.name);
+	//gs.addInfoMessage("current object : " + current.name);
+	gs.info("check selected value RHEL : " + current.variables.OS_RHEL72);
+	gs.info("check selected value RHEL : " + current.variables.OS_RHEL73);
+	gs.info("check selected value ESX : " + current.variables.OS_ESX6);
+	var os_name = '';
+	if (current.variables.OS_RHEL72) {
+		os_name = 'RHEL7.2';
+	} else if (current.variables.OS_RHEL73) {
+		os_name = 'RHEL7.3';
+	} else if (current.variables.OS_ESX6) {
+		os_name = 'ESX6';
+	}
+	var uuid = '';
+	var target = new GlideRecord('cmdb_ci_server');
+	target.addQuery('os_domain', '=' ,'NoProfileApplied');
+	target.query();
+	while(target.next()) {
+		gs.info("target record : " + target.os_domain);
+		uuid = target.asset_tag;
+		gs.info("uuid : " + uuid);
+		break;
+	}
+	
+	
+	gs.info( "Before calling login API");
+	var arrow_address = "15.218.153.166";
+	var midServer = 'linux-mid-server';
+	
+	if (current == null)
+		return;
+	
+	try {		 
+		
+		 //POST /v1/login-sessions to get the token
+		 var restMessage = new sn_ws.RESTMessageV2('x_tieoy_oneview_in.arrow login prakash', 'post');
+		 
+		 restMessage.setEndpoint("http://" + arrow_address +":3000/arrow/v1/login-sessions");
+		 restMessage.setMIDServer(midServer);
+		
+		 var response = restMessage.execute();
+		 var resBody = response.getBody();
+		 gs.info("resBody: " + resBody);
+		 var json = new global.JSON(); 
+		 gs.info("after JSONParser");
+		 var responseBody =  json.decode(resBody.toString());
+		 var httpStatus = response.getStatusCode();
+		
+		 gs.info(" response body from login-sessions : ", responseBody);
+		 gs.debug( " token: ", responseBody.token);
+			 
+		 if (httpStatus == 200) {
+			 //POST call /arrow/v1/provision-server to create a server profile
+			 var restMessage2 = new sn_ws.RESTMessageV2('x_tieoy_oneview_in.oneview server provision', 'post');
+			 //set the request body
+			 //TODO: get these values from table instead of hard-coding
+			 //"36343537-3338-4E43-3735-313730434D37"
+			 var reqBody = '{"uuid": "'+ uuid + '", "osName" : "'+ os_name +'" , "token" : "'+ responseBody.token +'"}';
+			 restMessage2.setRequestHeader("auth", responseBody.token);			 
+			 restMessage2.setRequestBody(reqBody);
+			 
+			 restMessage2.setEndpoint("http://" + arrow_address +":3000/arrow/v1/provision-server");
+		     restMessage2.setMIDServer(midServer);
+
+			 var response2 = restMessage2.execute();
+			 var responseBody2 = response2.getBody();
+			 var httpStatus2 = response2.getStatusCode();
+			 
+			 gs.info( " return http status after server provision :", httpStatus2);
+		 }
+	}
+	catch(ex) {
+		 var message = ex.getMessage();
+	}
+
+})(current, previous);
