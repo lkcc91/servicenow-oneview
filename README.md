@@ -32,6 +32,9 @@ The following use cases are supported by this integration.
     5. Java 1.8
     6. Python3 and pip3
     7. Rundeck ( job scheduler to sync servers inventory )
+- For filtering the alerts ( for example : which one should go to incident table and which one should land on events table ), prepare
+  the trap list ( .csv file ). A sample filtered trap list file can be found at ./scripts/traps folder. This file is being load and read
+  by script during runtime.
 
 ## Build Instructions (How to setup )
 1. clone the repo onto your PC or VM
@@ -60,13 +63,14 @@ The following use cases are supported by this integration.
 ## How to run the application  
 1. start the elasticsearch instance
 2. cd to servicenow-oneview, run "node server.js |  ./node_modules/.bin/bunyan" command to start the nodejs server
-3. cd to servicenow-oneview/scripts and run scmb python script with below command
+3. check the trap list file (.csv ) in in ./scripts/traps folder. This csv file is being read and alerts are filtered based on this list
+4. cd to servicenow-oneview/scripts and run scmb python script with below command
    >python3 ovincidents.py -i <path to arguments.json>
 
 ## How to test and troubleshoot
 ### Use Case #1
     1. Simulate or generate "active" alert on oneview
-    2. You should see an new incidents on servicenow ( if incident already exists, it updated with new alert. One incident per server hardware )
+    2. You should see an new incidents on servicenow ( if incident already exists, it updated with new alert. One incident per server hardware ). Depending on the filtered trap list, you will alerts landing in Incident table or events table.
     3. If you close an incident in servicenow, the alert will be cleared on oneview
     4. Review arrow.log and OVSB.log for additional troubleshooting ( if you run into any issues )
 ### Use Case #3
