@@ -65,7 +65,7 @@ The following use cases are supported by this integration.
 2. cd to servicenow-oneview, run "node server.js |  ./node_modules/.bin/bunyan" command to start the nodejs server
 3. check the trap list file (.csv ) in in ./scripts/traps folder. This csv file is being read and alerts are filtered based on this list
 4. cd to servicenow-oneview/scripts and run scmb python script with below command
-   >python3 ovincidents.py -i <path to arguments.json>
+   python3 ovincidents.py -i "path to arguments.json"
 
 ## How to test and troubleshoot
 ### Use Case #1
