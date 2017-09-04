@@ -340,7 +340,6 @@ def readFiles(filePath):
 from requests.auth import HTTPBasicAuth
 
 # GLOBAL VARIABLES
-# SERVICE_NOW_INSTANCE_URL = "https://tietosrvautodemo.service-now.com"
 SERVICE_NOW_INSTANCE_URL = "https://<>.service-now.com"
 INCIDENT_TABLE_URI = "/api/now/table/incident"
 EM_ALERTS_TABLE_URI = "/api/now/table/em_alert"
