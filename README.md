@@ -74,12 +74,16 @@ The following use cases are supported by this integration.
     3. If you close an incident in servicenow, the alert will be cleared on oneview
     4. Review arrow.log and OVSB.log for additional troubleshooting ( if you run into any issues )
 ### Use Case #3
-    1. Request service catalog if you have design service catalog request
+    1. Request physical server service catalog from your request catalog
     2. Approve the request
-    3. You should bare metal server getting provisioned in OneView
+    3. You should see bare metal server getting provisioned in OneView
+    Note: Before runnig this use case, you should configure REST message endpoints and should do basic testing to make sure your         connections and endpoints are working
 ### Use Case #2
-    1. Run scripts/synchw.py through Run deck or manually
-    2. After running the above scripts, records in CMDB should be updated.
+    1. For running configuration management use case, you should have prior knowledge of ServiceNow CDMB records and uploading CMDB records either using csv file or some othe mechanism.
+    2. run scripts/load_ci_items.py script to get servers list from OneView and store into csv file
+    3. Follow ServiceNow steps to load csv file onto CMDB records table
+    1. Run scripts/synchw.py through Run deck software or manually for ondemand sync'ing between OneView and CMDB records
+    2. After running the above scripts, records in CMDB should be updated. Script updates 'os_version' and 'os_domain' fields of CMDB CI table. This marks the server and becomes unavailable for service request
 ## Assumptions
 1. Initial HPE servers records should be created in the ServiceNow CMDB
 2. Service catalog request offering should be created for running use case # 2
