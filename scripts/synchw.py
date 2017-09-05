@@ -20,9 +20,9 @@
 # THE SOFTWARE.
 ###
 # Dependencies
-# pip --proxy http://proxy.houston.hpecorp.net:8080 install http
-# pip --proxy http://proxy.houston.hpecorp.net:8080 install openssl
-# pip --proxy http://proxy.houston.hpecorp.net:8080 install elasticsearch
+# pip --proxy http://proxy.xyz.net:8080 install http
+# pip --proxy http://proxy.xyz.net:8080 install openssl
+# pip --proxy http://proxy.xyz.net:8080 install elasticsearch
 
 from hpOneView.oneview_client import OneViewClient
 from hpOneView.exceptions import HPOneViewException
@@ -34,7 +34,7 @@ import sys
 import re
 
 ## ServiceNOW specific API sets
-instance = 'https://dev33344.service-now.com/'
+instance = 'https://devxxxx.service-now.com/'
 url = 'api/now/table/'
 srv_table = 'cmdb_ci_server'
 model_table = 'cmdb_model'
@@ -46,18 +46,18 @@ pwd = 'admin'
 
 # OneView credentials
 config = {
-    'ip': '10.188.29.1',
+    'ip': '10.10.10.10',
     'api_version' : 300,
     'credentials': {
         'userName': 'Administrator',
-        'password': 'P@ssw0rd1'
+        'password': 'administrator'
     }
 }
 
 # Use proxies within HPE
 proxies = {
-  'http': 'http://proxy.houston.hpecorp.net:8080/',
-  'https': 'http://proxy.houston.hpecorp.net:8080/',
+  'http': 'http://proxy.xyz.net:8080/',
+  'https': 'http://proxy.xyz.net:8080/',
 }
 
 # Set proper headers
