@@ -1,6 +1,6 @@
 #Dependencies
-#pip--proxyhttp://proxy.houston.hpecorp.net:8080installhttp
-#pip--proxyhttp://proxy.houston.hpecorp.net:8080installopenssl
+#pip --proxyhttp://proxy.xyz.net:8080 install http
+#pip--proxyhttp://proxy.xyz.net:8080 install openssl
 
 from hpOneView.oneview_client import OneViewClient
 from hpOneView.exceptions import HPOneViewException
@@ -16,10 +16,10 @@ import requests
 #import OpenSSL
 
 config={
-"ip":"10.188.29.1",
+"ip":"10.10.10.10",
 "credentials":{
 "userName":"Administrator",
-"password":"P@ssw0rd1"
+"password":"administrator"
 }
 }
 #connecttotheclient
